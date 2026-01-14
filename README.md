@@ -4,12 +4,12 @@
 
 **Unleash Coherent Reasoning—MemoBrain Empowers LLMs with Executive Memory**
 
-[![arXiv](https://img.shields.io/badge/arXiv-XXXX.XXXXX-b31b1b.svg)]()
+[![arXiv](https://img.shields.io/badge/arXiv-2601.08079-b31b1b.svg)]()
 [![Hugging Face](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Models-yellow)](https://huggingface.co/TommyChien)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 
-[📄 Paper]() | [🤗 MemoBrain-4B](https://huggingface.co/TommyChien/MemoBrain-4B) | [🤗 MemoBrain-8B](https://huggingface.co/TommyChien/MemoBrain-8B) | [🤗 MemoBrain-14B](https://huggingface.co/TommyChien/MemoBrain-14B) 
+[📄 Paper](https://arxiv.org/abs/2601.08079) | [🤗 MemoBrain-4B](https://huggingface.co/TommyChien/MemoBrain-4B) | [🤗 MemoBrain-8B](https://huggingface.co/TommyChien/MemoBrain-8B) | [🤗 MemoBrain-14B](https://huggingface.co/TommyChien/MemoBrain-14B) 
 
 </div>
 
@@ -279,6 +279,14 @@ cd examples
 python run_task.py --eval_task gaia --help
 ```
 
+**💡 Tips on API Costs:**
+
+Running the ReAct agent requires search API and web content fetching services. Fortunately:
+
+- **Google Cloud** provides new accounts with **$300 in free credits** (valid for 90 days) — our search functionality relies entirely on Google's generosity!
+- For agent-friendly web data, we're building [**Agentic Data Interface**](https://data.rag.ac.cn/) — a free platform designed as critical infrastructure for the agent era. It transforms raw web pages into LLM-ready format with intelligent "head files" containing metadata and core summaries, enabling agents to preview content and decide what to read without loading full documents.
+- We're working to provide **free parsed web data** specifically for deep research benchmarks. Stay tuned!
+
 **Programmatic usage (after setup):**
 
 ```python
@@ -506,8 +514,8 @@ If you find MemoBrain useful for your research, please cite our paper:
 ```bibtex
 @article{memobrain2026,
   title={MemoBrain: Executive Memory as an Agentic Brain for Reasoning},
-  author={},
-  journal={arXiv preprint arXiv:XXXX.XXXXX},
+  author={Hongjin Qian, Zhao Cao, Zheng Liu},
+  journal={arXiv preprint arXiv:2601.08079},
   year={2026}
 }
 ```
