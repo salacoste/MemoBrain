@@ -76,11 +76,14 @@ MemoBrain can work with **any LLM** as the foundation model via OpenAI-compatibl
 # Install vLLM
 pip install vllm
 
-# Deploy MemoBrain-14B (recommended)
-vllm serve TommyChien/MemoBrain-14B --port 8002
-
-# Or deploy MemoBrain-8B for lower resource usage
+# Deploy MemoBrain-8B (efficiency and performance tradeoff)
 vllm serve TommyChien/MemoBrain-8B --port 8002
+
+# Or deploy MemoBrain-4B (low resource usage)
+vllm serve TommyChien/MemoBrain-4B --port 8002
+
+# Or deploy MemoBrain-14B (best performance)
+vllm serve TommyChien/MemoBrain-14B --port 8002
 ```
 
 #### Python Usage
@@ -95,7 +98,7 @@ async def main():
     memory = MemoBrain(
         api_key="EMPTY",  # vLLM doesn't require API key
         base_url="http://localhost:8002/v1",
-        model_name="TommyChien/MemoBrain-14B"
+        model_name="TommyChien/MemoBrain-8B"
     )
     
     # Option B: Use commercial models
@@ -304,7 +307,7 @@ async def main():
         reasoning_model_api_key="empty",
         
         # Auxiliary model (for web page summarization)
-        auxiliary_model="Qwen/Qwen2.5-14B-Instruct",
+        auxiliary_model="Qwen/Qwen3-30B-A3B-Instruct-2507",
         auxiliary_model_base_url="http://localhost:8001/v1",
         auxiliary_model_api_key="empty",
         
