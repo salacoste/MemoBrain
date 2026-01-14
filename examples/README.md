@@ -22,10 +22,10 @@ Deploy three models using vLLM in separate terminals:
 vllm serve Alibaba-NLP/Tongyi-DeepResearch-30B-A3B --port 8000
 
 # Terminal 2: Auxiliary Model (Web Page Summarization)
-vllm serve Qwen/Qwen2.5-14B-Instruct --port 8001
+vllm serve Qwen/Qwen3-30B-A3B-Instruct-2507 --port 8001
 
 # Terminal 3: Memory Model (Memory Management)
-vllm serve TommyChien/MemoBrain-14B --port 8002
+vllm serve TommyChien/MemoBrain-8B --port 8002
 ```
 
 **Model Roles:**
@@ -153,9 +153,9 @@ python run_task.py \
   --eval_task gaia \
   --reasoning_model Alibaba-NLP/Tongyi-DeepResearch-30B-A3B \
   --reasoning_model_base_url http://localhost:8000/v1 \
-  --auxiliary_model Qwen/Qwen2.5-14B-Instruct \
+  --auxiliary_model Qwen/Qwen3-30B-A3B-Instruct-2507 \
   --auxiliary_model_base_url http://localhost:8001/v1 \
-  --memory_model TommyChien/MemoBrain-14B \
+  --memory_model TommyChien/MemoBrain-8B \
   --memory_model_base_url http://localhost:8002/v1 \
   --max_memory_size 32768
 ```
@@ -180,10 +180,10 @@ config = Configuration(
     reasoning_model="Alibaba-NLP/Tongyi-DeepResearch-30B-A3B",
     reasoning_model_base_url="http://localhost:8000/v1",
     reasoning_model_api_key="empty",
-    auxiliary_model="Qwen/Qwen2.5-14B-Instruct",
+    auxiliary_model="Qwen/Qwen3-30B-A3B-Instruct-2507",
     auxiliary_model_base_url="http://localhost:8001/v1",
     auxiliary_model_api_key="empty",
-    memory_model="TommyChien/MemoBrain-14B",
+    memory_model="TommyChien/MemoBrain-8B",
     memory_model_base_url="http://localhost:8002/v1",
     memory_model_api_key="empty",
     max_memory_size=32*1024,  # 32K tokens
@@ -406,15 +406,6 @@ else:
     config.max_memory_size = 16 * 1024  # 16K tokens
 ```
 
-### Multiple Memory Models
-
-```python
-# Use different memory models for different tasks
-if eval_task == "gaia":
-    config.memory_model = "TommyChien/MemoBrain-14B"
-else:
-    config.memory_model = "TommyChien/MemoBrain-8B"
-```
 
 ### Custom Tools
 
