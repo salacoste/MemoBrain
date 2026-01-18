@@ -9,17 +9,19 @@
 | [API-REFERENCE.md](./API-REFERENCE.md) | Полный справочник API с примерами |
 | [USAGE-GUIDE.md](./USAGE-GUIDE.md) | Практическое руководство, паттерны, best practices |
 | [TEMPORAL-KNOWLEDGE.md](./TEMPORAL-KNOWLEDGE.md) | Управление временными аспектами знаний |
-| [API-TEMPORAL.md](./API-TEMPORAL.md) | **API для TemporalMemoBrain** (NEW) |
+| [API-TEMPORAL.md](./API-TEMPORAL.md) | API для TemporalMemoBrain |
+| **[MCP-SERVER.md](./MCP-SERVER.md)** | **MCP Server для Claude Code и BMad** (NEW) |
 
-## Версии MemoBrain
+## Компоненты MemoBrain
 
-| Класс | Файл | SDK | Temporal |
-|-------|------|-----|----------|
-| `MemoBrain` | `memobrain.py` | OpenAI | ❌ |
-| `MemoBrainAnthropic` | `memobrain_anthropic.py` | Anthropic | ❌ |
-| **`TemporalMemoBrain`** | `memobrain_temporal.py` | Anthropic | ✅ |
+| Компонент | Файл | Описание |
+|-----------|------|----------|
+| `MemoBrain` | `memobrain.py` | Базовый класс (OpenAI SDK) |
+| `MemoBrainAnthropic` | `memobrain_anthropic.py` | Anthropic SDK адаптер |
+| `TemporalMemoBrain` | `memobrain_temporal.py` | Temporal tracking расширение |
+| **MCP Server** | `mcp_server.py` | **MCP сервер для Claude Code** |
 
-**Рекомендуется:** `TemporalMemoBrain` для долгосрочного использования
+**Рекомендуется:** MCP Server для интеграции с BMad workflows
 
 ---
 

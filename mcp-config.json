@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "memobrain": {
+      "command": "python",
+      "args": ["-m", "src.mcp_server"],
+      "cwd": "/Users/r2d2/Documents/Code_Projects/wb-repricer-system-new/memobrain",
+      "env": {
+        "PYTHONPATH": "/Users/r2d2/Documents/Code_Projects/wb-repricer-system-new/memobrain"
+      }
+    }
+  }
+}
