@@ -8,14 +8,17 @@ import sys
 import os
 from datetime import datetime, timedelta
 
+# Load environment variables from .env file
+from dotenv import load_dotenv
+load_dotenv()
+
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'src'))
 from memobrain_temporal import TemporalMemoBrain
 
-# z.ai Configuration
-import os
+# z.ai Configuration (from .env or environment)
 API_KEY = os.environ.get("ZAI_API_KEY", "your_api_key_here")
-BASE_URL = "https://api.z.ai/api/anthropic"
-MODEL_NAME = "GLM-4.5-Air"
+BASE_URL = os.environ.get("ZAI_BASE_URL", "https://api.z.ai/api/anthropic")
+MODEL_NAME = os.environ.get("ZAI_MODEL", "GLM-4.5-Air")
 
 
 async def test_temporal_features():

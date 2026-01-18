@@ -7,15 +7,18 @@ import asyncio
 import sys
 import os
 
+# Load environment variables from .env file
+from dotenv import load_dotenv
+load_dotenv()
+
 # Add src to path for the modified module
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'src'))
 
 from memobrain_anthropic import MemoBrainAnthropic
 
-# z.ai Configuration (from docs.z.ai)
-import os
+# z.ai Configuration (from .env or environment)
 API_KEY = os.environ.get("ZAI_API_KEY", "your_api_key_here")
-BASE_URL = "https://api.z.ai/api/anthropic"
+BASE_URL = os.environ.get("ZAI_BASE_URL", "https://api.z.ai/api/anthropic")
 
 # Model mappings from z.ai docs
 MODELS = {

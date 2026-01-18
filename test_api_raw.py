@@ -4,12 +4,16 @@ Raw API test to see what GLM returns
 """
 
 import asyncio
+import os
 from openai import AsyncOpenAI
 
-import os
+# Load environment variables from .env file
+from dotenv import load_dotenv
+load_dotenv()
+
 API_KEY = os.environ.get("ZAI_API_KEY", "your_api_key_here")
-BASE_URL = "https://open.bigmodel.cn/api/paas/v4"  # BigModel (Zhipu AI) endpoint
-MODEL = "glm-4.5-air"  # lowercase
+BASE_URL = os.environ.get("ZAI_BASE_URL", "https://api.z.ai/api/anthropic")
+MODEL = os.environ.get("ZAI_MODEL", "GLM-4.5-Air")
 
 async def test_raw_api():
     client = AsyncOpenAI(api_key=API_KEY, base_url=BASE_URL)

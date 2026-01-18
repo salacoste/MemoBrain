@@ -7,15 +7,16 @@ import asyncio
 import sys
 import os
 
+# Load environment variables from .env file
+from dotenv import load_dotenv
+load_dotenv()
+
 # Use installed package (from .venv)
 from memobrain import MemoBrain
 
-# Configuration for z.ai
-import os
+# z.ai Configuration (from .env or environment)
 API_KEY = os.environ.get("ZAI_API_KEY", "your_api_key_here")
-
-# z.ai OpenAI-compatible endpoint
-BASE_URL = "https://api.z.ai/api/openai/v1"
+BASE_URL = os.environ.get("ZAI_BASE_URL", "https://api.z.ai/api/anthropic")
 
 # Available models (mapped from Anthropic names)
 MODELS = {
