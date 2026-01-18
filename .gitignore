@@ -4,6 +4,11 @@ __pycache__/
 *$py.class
 
 *.jsonl
+
+# Test output files
+*_memory_test.json
+*_memory_snapshot.json
+*_snapshot.json
 # C extensions
 *.so
 
