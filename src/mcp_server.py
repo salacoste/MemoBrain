@@ -154,15 +154,17 @@ def memory_init(
             "message": f"Session '{session_id}' already exists. Use memory_load or choose different ID."
         }
 
-    # Create new TemporalMemoBrain instance
+    # Create new TemporalMemoBrain instance with session_id and participant
     memory = TemporalMemoBrain(
         api_key=app_ctx.api_key,
         base_url=app_ctx.base_url,
-        model_name=app_ctx.model_name
+        model_name=app_ctx.model_name,
+        session_id=session_id,
+        default_participant=agent
     )
 
     # Initialize with task
-    memory.init_memory(task, session_id=session_id, participant=agent)
+    memory.init_memory(task)
 
     # Create session
     session = MemorySession(
