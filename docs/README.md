@@ -63,6 +63,8 @@ memobrain/
 ├── src/
 │   ├── memobrain.py           # OpenAI SDK версия
 │   ├── memobrain_anthropic.py # Anthropic SDK (z.ai)
+│   ├── memobrain_temporal.py  # Temporal tracking расширение
+│   ├── mcp_server.py          # MCP сервер для AI агентов
 │   ├── problem_tree.py        # ReasoningGraph
 │   ├── schema.py              # Pydantic модели
 │   └── prompts.py             # Системные промпты
@@ -71,10 +73,15 @@ memobrain/
 │   ├── ARCHITECTURE.md
 │   ├── DATA-MODEL.md
 │   ├── API-REFERENCE.md
+│   ├── API-TEMPORAL.md
 │   ├── USAGE-GUIDE.md
-│   └── TEMPORAL-KNOWLEDGE.md
+│   ├── TEMPORAL-KNOWLEDGE.md
+│   └── MCP-SERVER.md
 ├── examples/
 │   └── ...
+├── .env                       # Configuration (gitignored)
+├── .env.example               # Configuration template
+├── mcp-config.json            # MCP server definition
 ├── .venv/                     # Virtual environment
 └── test_*.py                  # Тесты
 ```

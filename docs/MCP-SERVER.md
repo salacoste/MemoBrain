@@ -23,11 +23,24 @@ uv pip install "mcp[cli]" python-dotenv anthropic
 Create `.env` file:
 
 ```bash
-# Required
+# API Configuration (required for memory folding)
 ZAI_API_KEY=your_api_key_here
 ZAI_BASE_URL=https://api.z.ai/api/anthropic
 ZAI_MODEL=GLM-4.5-Air
+
+# Storage Configuration (optional)
+# Path where memory sessions are persisted as JSON files
+# Can be relative (to memobrain/ directory) or absolute
+# Default: ./_bmad-output/memory
+MEMOBRAIN_STORAGE_PATH=../_bmad-output/memory
 ```
+
+| Variable | Required | Default | Description |
+|----------|----------|---------|-------------|
+| `ZAI_API_KEY` | Yes | - | API key for LLM operations |
+| `ZAI_BASE_URL` | No | `https://api.z.ai/api/anthropic` | API endpoint |
+| `ZAI_MODEL` | No | `GLM-4.5-Air` | Model for memory operations |
+| `MEMOBRAIN_STORAGE_PATH` | No | `./_bmad-output/memory` | Session storage path |
 
 ### Claude Code Integration
 
@@ -329,16 +342,32 @@ Before complex reasoning:
 
 ## Storage
 
-Memory files are stored in `_bmad-output/memory/` by default.
+Memory files are stored in the path specified by `MEMOBRAIN_STORAGE_PATH` environment variable.
 
-Structure:
+**Default:** `./_bmad-output/memory/` (relative to memobrain directory)
+
+### Configuring Storage Path
+
+```bash
+# Parent project's output folder (when used as submodule)
+MEMOBRAIN_STORAGE_PATH=../_bmad-output/memory
+
+# Absolute path
+MEMOBRAIN_STORAGE_PATH=/var/data/memobrain
+
+# Local to memobrain folder (default behavior)
+MEMOBRAIN_STORAGE_PATH=./_bmad-output/memory
 ```
-_bmad-output/
-└── memory/
-    ├── pm_20240115_120000.json
-    ├── architect_20240115_130000.json
-    ├── epic-42-auth.json
-    └── ...
+
+**Important:** When running as an MCP server, the path is resolved relative to the `cwd` specified in your MCP configuration. If using MemoBrain as a submodule, use `../` to reference the parent project directory.
+
+### Structure
+```
+{storage_path}/
+├── pm_20240115_120000.json
+├── architect_20240115_130000.json
+├── epic-42-auth.json
+└── ...
 ```
 
 ---
@@ -353,9 +382,18 @@ _bmad-output/
 
 ### Memory not persisting
 
-1. Check storage path permissions
-2. Verify `memory_save()` called before session ends
-3. Server auto-saves on shutdown
+1. Check `MEMOBRAIN_STORAGE_PATH` is set correctly in `.env`
+2. Verify path is relative to memobrain/ directory (or use absolute path)
+3. Check storage path permissions
+4. Verify `memory_save()` called before session ends
+5. Server auto-saves on shutdown
+
+### Sessions not loading after restart
+
+1. **Check relative path**: MCP server runs from `memobrain/` directory
+2. **For submodule usage**: Set `MEMOBRAIN_STORAGE_PATH=../_bmad-output/memory`
+3. **Verify files exist**: `ls ${MEMOBRAIN_STORAGE_PATH}`
+4. **Use absolute path for load**: `memory_load("/full/path/to/session.json")`
 
 ### API errors
 
