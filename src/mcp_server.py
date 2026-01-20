@@ -58,12 +58,20 @@ class MemorySession:
     last_activity: datetime = field(default_factory=datetime.now)
 
 
+def _get_default_storage_path() -> Path:
+    """Get storage path from environment or use default."""
+    env_path = os.environ.get("MEMOBRAIN_STORAGE_PATH")
+    if env_path:
+        return Path(env_path)
+    return Path("./_bmad-output/memory")
+
+
 @dataclass
 class AppContext:
     """Application context with shared resources."""
     sessions: Dict[str, MemorySession] = field(default_factory=dict)
     active_session_id: Optional[str] = None
-    storage_path: Path = field(default_factory=lambda: Path("./_bmad-output/memory"))
+    storage_path: Path = field(default_factory=_get_default_storage_path)
 
     # API configuration
     api_key: str = ""
@@ -79,6 +87,7 @@ async def app_lifespan(server: FastMCP) -> AsyncIterator[AppContext]:
         api_key=os.environ.get("ZAI_API_KEY", ""),
         base_url=os.environ.get("ZAI_BASE_URL", "https://api.z.ai/api/anthropic"),
         model_name=os.environ.get("ZAI_MODEL", "GLM-4.5-Air"),
+        storage_path=_get_default_storage_path(),
     )
 
     # Ensure storage directory exists
